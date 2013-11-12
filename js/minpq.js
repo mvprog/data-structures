@@ -1,10 +1,12 @@
+
+
 (function () {
     PQ = function (options) {
         var heap = [],
             N = 0,
-            comparator;
+            compareFn;
 
-        comparator = options && options.comparator ? options.comparator : greaterThan;
+        compareFn = options && options.compareFn ? options.compareFn : compareTo;
 
         var impl = Object.create(null);
 
@@ -41,10 +43,10 @@
         return impl;
 
         function greater(i, j) {
-            return comparator(heap[i], heap[j]) === 1;
+            return compareFn(heap[i], heap[j]) === 1;
         }
 
-        function greaterThan(x, y) {
+        function compareTo(x, y) {
             return x > y ? 1 : (x < 1 ? -1 : 0);
         }
 
