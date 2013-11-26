@@ -1,7 +1,5 @@
-
-
-(function () {
-    PQ = function (options) {
+(function (root) {
+    root.PQ = function (options) {
         var heap = [],
             N = 0,
             compareFn;
@@ -14,9 +12,8 @@
             return N === 0;
         };
 
-        impl.insert = function (x) {
-            heap[++N] = x;
-            swimUp(N);
+        impl.insert = function (item) {
+            insert(item);
         };
 
         impl.pop = function () {
@@ -32,6 +29,10 @@
             }
         }
 
+        impl.peek = function () {
+            return N > 0 ? heap[1] : undefined;
+        }
+
         impl.size = function () {
             return N;
         };
@@ -40,7 +41,18 @@
             return heap.slice(1, N + 1);
         };
 
+        impl.merge = function (q) {
+            q.items().forEach(function (item) {
+                insert(item);
+            });
+        };
+
         return impl;
+
+        function insert(item) {
+            heap[++N] = item;
+            swimUp(N);
+        }
 
         function greater(i, j) {
             return compareFn(heap[i], heap[j]) === 1;
@@ -75,4 +87,4 @@
             }
         }
     };
-})();
+})(this);
