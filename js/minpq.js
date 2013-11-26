@@ -6,7 +6,7 @@
             N = 0,
             compareFn;
 
-        compareFn = options && options.compareFn ? options.compareFn : compareTo;
+        compareFn = options && options.compareFn ? options.compareFn : defaultCompareFn;
 
         var impl = Object.create(null);
 
@@ -60,7 +60,7 @@
             return compareFn(heap[i], heap[j]) === 1;
         }
 
-        function compareTo(x, y) {
+        function defaultCompareFn(x, y) {
             return x > y ? 1 : (x < 1 ? -1 : 0);
         }
 
