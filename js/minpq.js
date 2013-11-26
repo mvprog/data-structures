@@ -1,3 +1,5 @@
+'use strict';
+
 (function (root) {
     root.PQ = function (options) {
         var heap = [],
